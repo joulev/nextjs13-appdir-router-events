@@ -4,7 +4,9 @@ import RootLayoutClient from "~/layout.client";
 export default function RootLayout({ children }: React.PropsWithChildren) {
   return (
     <html lang="en">
-      <head />
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </head>
       <body style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
         <RootLayoutClient>{children}</RootLayoutClient>
         <div>
