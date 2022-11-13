@@ -1,5 +1,4 @@
 import { cookies } from "next/headers";
-import Anchor from "~/Anchor.client";
 
 async function getData() {
   const nextCookies = cookies().getAll();
@@ -9,11 +8,5 @@ async function getData() {
 
 export default async function SSRPage() {
   const { name } = await getData();
-  return (
-    <main>
-      <h1>SSR Page</h1>
-      <div>Name = {name}</div>
-      <Anchor href="/">Home</Anchor>
-    </main>
-  );
+  return <h1>Welcome {name}</h1>;
 }
