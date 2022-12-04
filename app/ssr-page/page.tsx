@@ -8,5 +8,5 @@ async function getData() {
 
 export default async function SSRPage() {
   const { name } = await getData();
-  return <h1>Welcome {name}</h1>;
+  return <h1>SSR page with name = {name}</h1>;
 }

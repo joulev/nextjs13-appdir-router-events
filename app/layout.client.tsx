@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { usePathname, useSearchParams, useSelectedLayoutSegment } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import NProgress from "nprogress";
 import Anchor from "~/Anchor.client";
 import StartRouterChangeContext from "~/StartRouterChangeContext.client";
@@ -28,23 +28,27 @@ function RouterEventWrapper({
   );
 }
 
+function NavLink({ href, children }: React.PropsWithChildren<{ href: string }>) {
+  const pathname = usePathname();
+  return (
+    <Anchor href={href} style={{ fontWeight: pathname === href ? "bold" : undefined }}>
+      {children}
+    </Anchor>
+  );
+}
+
 export default function RootLayoutClient({ children }: React.PropsWithChildren) {
   const onStart = useCallback(() => NProgress.start(), []);
   const onComplete = useCallback(() => NProgress.done(), []);
-  const segment = useSelectedLayoutSegment();
   return (
     <RouterEventWrapper onStart={onStart} onComplete={onComplete}>
       {children}
       <div style={{ display: "flex", gap: "2rem" }}>
-        <Anchor href="/" style={{ fontWeight: segment === null ? "bold" : undefined }}>
-          Home
-        </Anchor>
-        <Anchor
-          href="/ssr-page"
-          style={{ fontWeight: segment === "ssr-page" ? "bold" : undefined }}
-        >
-          SSR Page
-        </Anchor>
+        <NavLink href="/">Home</NavLink>
+        <NavLink href="/ssr-page">SSR page</NavLink>
+        <NavLink href="/dynamic">Dynamic home</NavLink>
+        <NavLink href="/dynamic/foo">Dynamic foo</NavLink>
+        <NavLink href="/dynamic/bar">Dynamic bar</NavLink>
       </div>
     </RouterEventWrapper>
   );
