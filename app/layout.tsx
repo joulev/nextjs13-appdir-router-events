@@ -7,7 +7,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
-      <body style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
+      <body style={{ display: "flex", flexDirection: "column", gap: "3rem" }}>
         <RootLayoutClient>{children}</RootLayoutClient>
         <div>
           <a href="https://github.com/joulev/nextjs13-router-events">View source on GitHub</a>

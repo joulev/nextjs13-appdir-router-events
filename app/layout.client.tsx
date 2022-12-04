@@ -43,7 +43,7 @@ export default function RootLayoutClient({ children }: React.PropsWithChildren) 
   return (
     <RouterEventWrapper onStart={onStart} onComplete={onComplete}>
       {children}
-      <div style={{ display: "flex", gap: "2rem" }}>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem 2rem" }}>
         <NavLink href="/">Home</NavLink>
         <NavLink href="/ssr-page">SSR page</NavLink>
         <NavLink href="/dynamic">Dynamic home</NavLink>
