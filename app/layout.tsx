@@ -4,9 +4,6 @@ import RootLayoutClient from "~/layout.client";
 export default function RootLayout({ children }: React.PropsWithChildren) {
   return (
     <html lang="en">
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </head>
       <body style={{ display: "flex", flexDirection: "column", gap: "3rem" }}>
         <RootLayoutClient>{children}</RootLayoutClient>
         <div>
@@ -22,3 +19,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
     </html>
   );
 }
+
+export const metadata = {
+  title: "Next.js 13 router events example",
+};
