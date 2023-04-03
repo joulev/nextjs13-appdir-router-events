@@ -1,11 +1,16 @@
 import "~/globals.css";
 import RootLayoutClient from "~/layout.client";
+import NavLink from "~/nav-link";
 
 export default function RootLayout({ children }: React.PropsWithChildren) {
   return (
     <html lang="en">
       <body style={{ display: "flex", flexDirection: "column", gap: "3rem" }}>
         <RootLayoutClient>{children}</RootLayoutClient>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem 2rem" }}>
+          <NavLink href="/">Home</NavLink>
+          <NavLink href="/ssr-page">SSR page</NavLink>
+        </div>
         <div>
           <a href="https://github.com/joulev/nextjs13-router-events">View source on GitHub</a>
         </div>
