@@ -3,9 +3,9 @@ async function getData() {
   return { name: "John Doe" };
 }
 
-export default async function SSRPage() {
+export default async function Page() {
   const { name } = await getData();
-  return <h1>SSR page with name = {name}</h1>;
+  return <h1>Dynamic page with name = {name}</h1>;
 }
 
 export const dynamic = "force-dynamic";

@@ -1,8 +1,7 @@
-"use client";
-
 import NextLink from "next/link";
 import { forwardRef } from "react";
-import { onStart } from "~/router-events";
+
+import { onStart } from "../events";
 
 // https://github.com/vercel/next.js/blob/400ccf7b1c802c94127d8d8e0d5e9bdf9aab270c/packages/next/src/client/link.tsx#L169
 function isModifiedEvent(event: React.MouseEvent): boolean {
@@ -18,7 +17,7 @@ function isModifiedEvent(event: React.MouseEvent): boolean {
   );
 }
 
-const Link = forwardRef<HTMLAnchorElement, React.ComponentProps<"a">>(function Link(
+export const Link = forwardRef<HTMLAnchorElement, React.ComponentProps<"a">>(function Link(
   { href, onClick, ...rest },
   ref,
 ) {
@@ -40,5 +39,3 @@ const Link = forwardRef<HTMLAnchorElement, React.ComponentProps<"a">>(function L
     />
   );
 });
-
-export default Link;

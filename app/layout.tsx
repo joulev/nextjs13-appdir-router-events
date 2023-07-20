@@ -1,15 +1,17 @@
-import "~/globals.css";
-import RootLayoutClient from "~/layout.client";
-import NavLink from "~/nav-link";
+import "./globals.css";
+
+import { HandleOnComplete } from "~/lib/router-events";
+
+import NavLink from "./nav-link";
 
 export default function RootLayout({ children }: React.PropsWithChildren) {
   return (
     <html lang="en">
       <body style={{ display: "flex", flexDirection: "column", gap: "3rem" }}>
-        <RootLayoutClient>{children}</RootLayoutClient>
+        {children}
         <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem 2rem" }}>
           <NavLink href="/">Home</NavLink>
-          <NavLink href="/ssr-page">SSR page</NavLink>
+          <NavLink href="/dynamic-page">Dynamic page</NavLink>
         </div>
         <div>
           <a href="https://github.com/joulev/nextjs13-router-events">View source on GitHub</a>
@@ -20,6 +22,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
           </a>{" "}
           by <a href="https://github.com/ErAz7">@ErAz7</a>
         </div>
+        <HandleOnComplete />
       </body>
     </html>
   );
