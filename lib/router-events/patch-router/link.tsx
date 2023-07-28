@@ -13,7 +13,7 @@ function isModifiedEvent(event: React.MouseEvent): boolean {
     event.ctrlKey ||
     event.shiftKey ||
     event.altKey || // triggers resource download
-    (event.nativeEvent && event.nativeEvent.which === 2)
+    (event.nativeEvent && event.nativeEvent.button === 1)
   );
 }
 
