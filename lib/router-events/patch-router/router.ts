@@ -20,10 +20,20 @@ export function useRouter(): ReturnType<typeof useRouterOriginal> {
     push: (...args) => {
       onStart();
       router.push(...args);
+      
+      const [href] = args;
+      if (href === window.location.href) {
+        onComplete();
+      }
     },
     replace: (...args) => {
       onStart();
       router.replace(...args);
+
+      const [href] = args;
+      if (href === window.location.href) {
+        onComplete();
+      }
     },
     prefetch: router.prefetch,
   };
