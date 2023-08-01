@@ -1,30 +1,19 @@
 import { useRouter as useRouterOriginal } from "next/navigation";
 
 import { onStart } from "../events";
+import { shouldTriggerStartEvent } from "./should-trigger-start-event";
 
 export function useRouter(): ReturnType<typeof useRouterOriginal> {
   const router = useRouterOriginal();
   return {
-    back: (...args) => {
-      onStart();
-      router.back(...args);
+    ...router,
+    push: (href, options) => {
+      if (shouldTriggerStartEvent(href)) onStart();
+      router.push(href, options);
     },
-    forward: (...args) => {
-      onStart();
-      router.forward(...args);
+    replace: (href, options) => {
+      if (shouldTriggerStartEvent(href)) onStart();
+      router.replace(href, options);
     },
-    refresh: (...args) => {
-      onStart();
-      router.refresh(...args);
-    },
-    push: (...args) => {
-      onStart();
-      router.push(...args);
-    },
-    replace: (...args) => {
-      onStart();
-      router.replace(...args);
-    },
-    prefetch: router.prefetch,
   };
 }

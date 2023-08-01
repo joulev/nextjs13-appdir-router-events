@@ -2,20 +2,7 @@ import NextLink from "next/link";
 import { forwardRef } from "react";
 
 import { onStart } from "../events";
-
-// https://github.com/vercel/next.js/blob/400ccf7b1c802c94127d8d8e0d5e9bdf9aab270c/packages/next/src/client/link.tsx#L169
-function isModifiedEvent(event: React.MouseEvent): boolean {
-  const eventTarget = event.currentTarget as HTMLAnchorElement | SVGAElement;
-  const target = eventTarget.getAttribute("target");
-  return (
-    (target && target !== "_self") ||
-    event.metaKey ||
-    event.ctrlKey ||
-    event.shiftKey ||
-    event.altKey || // triggers resource download
-    (event.nativeEvent && event.nativeEvent.button === 1)
-  );
-}
+import { shouldTriggerStartEvent } from "./should-trigger-start-event";
 
 export const Link = forwardRef<HTMLAnchorElement, React.ComponentProps<"a">>(function Link(
   { href, onClick, ...rest },
@@ -28,10 +15,7 @@ export const Link = forwardRef<HTMLAnchorElement, React.ComponentProps<"a">>(fun
     <NextLink
       href={href}
       onClick={(event) => {
-        if (!isModifiedEvent(event)) {
-          const { pathname, search, hash } = window.location;
-          if (href !== pathname + search + hash) onStart();
-        }
+        if (shouldTriggerStartEvent(href, event)) onStart();
         if (onClick) onClick(event);
       }}
       {...rest}
